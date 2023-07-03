@@ -28,11 +28,11 @@ def check_arg() :
         help='Specify the output units for the relative abundance results. Default is rpkm')
 
     # on/off flag
-    add('--filter_euk', '-e', action='store_true', help='Option to remove eukaryotes')
+    add('--filter_euk', '-e', action='store_true', help='Remove eukaryotes')
 
-    add('--filter_virus', '-v', action='store_true', help='Option to remove viruses')
+    add('--filter_virus', '-v', action='store_true', help='Remove viruses')
 
-    add('--novel_fam', '-f', action='store_true', help='Option to add novel families')
+    add('--novel_fam', '-f', action='store_true', help='Add novel families')
 
     add('--nf_dir', help=('Input directory that contains the novel families annotations. '
                           'By default considers a directory called novel_families inside the input directory'))
