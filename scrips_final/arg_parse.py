@@ -1,8 +1,9 @@
 import argparse
 
-def check_arg (args=None) :  # NOTE: args is not being used
-    parser = argparse.ArgumentParser(prog='emapper_profiler', formatter_class=argparse.RawDescriptionHelpFormatter,
-                                     description='Creates 2 tsv files with the ko abundance and kegg_pathway coverage of each sample')
+def check_arg() :
+    parser = argparse.ArgumentParser(
+        prog='emapper_profiler', formatter_class=argparse.RawDescriptionHelpFormatter,
+        description='Creates 2 tsv files with the ko abundance and kegg_pathway coverage of each sample')
 
     add = parser.add_argument
 
