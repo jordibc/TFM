@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import json
-import csv 
+import csv
 import re
 
 
@@ -11,7 +11,7 @@ def unique(list1):
     """
     Function to transform a list so its elements are not repeated
     """
- 
+
     # insert the list to the set
     list_set = set(list1)
     # convert the set to the list
@@ -42,12 +42,12 @@ def read_coverm_as_nested_dict(file_path, unit):
     with open(file_path, 'r') as tsv_file:
         reader = csv.DictReader(tsv_file, delimiter='\t') # read tsv file
 
-        for row in reader: # row is a dictionary 
+        for row in reader: # row is a dictionary
             contig = row['Contig'] # save contig
             nested_dict[contig] = {}
 
             for key, value in row.items():
-                if key != 'Contig': 
+                if key != 'Contig':
                     clean_key = clean_header_names(key)
                     if clean_key == unit: # get desired unit
                         nested_dict[contig][unit] = value # add value to nested dictionary
@@ -66,20 +66,20 @@ def get_ko_list(raw_ko):
     kos_list = []
     if ',' in raw_ko:
         kos = raw_ko.split(',')
-    else: 
+    else:
         kos = [raw_ko]
 
     for ko in kos:
         ko_id = ko.split(':')[1]
-        
+
         kos_list.append(ko_id)
 
     return kos_list
 
 def find_basal(eggnog_ogs):
 
-    """ 
-    Function to obtain the basal orthologous group and its kingdom level 
+    """
+    Function to obtain the basal orthologous group and its kingdom level
     """
 
     # Example of raw og line : COG0705@1|root,COG0705@2|Bacteria,1TSBP@1239|Firmicutes,249D8@186801|Clostridia
@@ -93,7 +93,7 @@ def find_basal(eggnog_ogs):
             return og_id, kingdom
 
 def check_unmapped(dict1:dict, sample_list:list, des=True):
-    
+
     if 'UNMAPPED' not in dict1.keys():
         dict1['UNMAPPED'] = {}
         for sample in sample_list:
@@ -113,7 +113,7 @@ def write_tsv (dictionnary, out_file, header, sample_list, des = False, king = F
     Return:
         dictionary
     '''
-	
+
     with open (out_file,'w') as fo:
         fo.write(header+ '\n')
         for key in dictionnary.keys():
@@ -136,7 +136,7 @@ def write_json(file, dictionary):
 
 
 def extract_orf_lengths(fasta_file, coverm_dict:dict, unit):
-    
+
     orf_dict = {}  # Dictionary to store sequence names, lengths and abundances
     total = 0
 

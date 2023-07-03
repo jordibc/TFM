@@ -36,7 +36,7 @@ with open(kos_dict_file, "r") as file:
     kos_dict = json.load(file)
 
 ## Get input directory and its files
-    
+
 inputdir = arguments.inputdir
 if not os.path.isdir(inputdir):
     print('Error: Input directory does not exist')
@@ -48,7 +48,7 @@ if arguments.nf_dir:
 else:
     novelfam_dir = os.path.join(inputdir+'/novel_families/')
 
-## Get output directory 
+## Get output directory
 
 outputdir = arguments.outputdir
 
@@ -124,9 +124,9 @@ for sample in sample_list:
     eggnog_file = os.path.join(inputdir, sample + '.emapper.annotations')
     coverm_file = os.path.join(inputdir, sample + coverm_suffix)
     genepred_file = os.path.join(inputdir, sample + '.emapper.genepred.fasta')
-    
-    # Load eggnog and coverm samples    
-    coverm_dict = read_coverm_as_nested_dict(coverm_file, Eggnog_sample.calc_unit) 
+
+    # Load eggnog and coverm samples
+    coverm_dict = read_coverm_as_nested_dict(coverm_file, Eggnog_sample.calc_unit)
     orf_dict, total = extract_orf_lengths(genepred_file, coverm_dict, Eggnog_sample.calc_unit)
 
     eggnog_sample = Eggnog_sample(eggnog_file, total, sample, remove_euk, remove_virus)
@@ -137,7 +137,7 @@ for sample in sample_list:
     og_abundance_all = eggnog_sample.calculate_og_abundance(og_abundance_all)
     ko_abundance_all = eggnog_sample.calculate_ko_abundance(ko_abundance_all, kos_dict)
     path_coverage = eggnog_sample.calculate_KEGG_pathway_completeness(path_coverage, KEGG_dict)
-    
+
     # Repeat process for novel families
     if novel_fam :
         novelfam_file = os.path.join(novelfam_dir, sample + '.emapper.annotations')
@@ -179,6 +179,3 @@ if novel_fam :
     header5='Novel_Fam\t'+ '\t'.join(sample_list)
     write_tsv(nf_abundance_all, nf_abun_file, header5, sample_list)
     write_tsv(nf_relabundance, nf_total_file, header5, sample_list)
-
-
-
